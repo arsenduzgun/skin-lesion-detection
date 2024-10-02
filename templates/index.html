@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Lesion Detection</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+            height: 100vh;
+            width: 100vw;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 80vw;
+            max-width: 1200px;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        p {
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        input[type="file"], input[type="submit"] {
+            padding: 10px 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        .loader {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .loader img {
+            width: 50px;
+        }
+        .result {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .intro {
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        .intro ul {
+            list-style-type: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .intro li {
+            background: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .intro img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+    </style>    
+</head>
+<body>
+    <div class="container">
+        <h1>Skin Lesion Detection Model</h1>
+        <div class="intro">
+            <p>This model is designed to assist in the detection of common skin lesions. It can identify the following skin conditions:</p>
+            <ul>
+                <li><strong>Actinic Keratosis:</strong> A rough, scaly patch on the skin caused by years of sun exposure. <img src="{{ url_for('static', filename='ISIC_0024468.jpg') }}" alt="Example of Actinic Keratosis"></li>
+                <li><strong>Basal Cell Carcinoma:</strong> A type of skin cancer that begins in the basal cells. <img src="{{ url_for('static', filename='ISIC_0024331.jpg') }}" alt="Example of Basal Cell Carcinoma"></li>
+                <li><strong>Dermatofibroma:</strong> A benign skin growth that feels like a hard lump. <img src="{{ url_for('static', filename='ISIC_0024318.jpg') }}" alt="Example of Dermatofibroma"></li>
+                <li><strong>Melanoma:</strong> The most serious type of skin cancer that develops in the cells that produce melanin. <img src="{{ url_for('static', filename='ISIC_0024310.jpg') }}" alt="Example of Melanoma"></li>
+                <li><strong>Nevus:</strong> Commonly known as a mole, it's a benign growth of melanocytes. <img src="{{ url_for('static', filename='ISIC_0024306.jpg') }}" alt="Example of Nevus"></li>
+                <li><strong>Pigmented Benign Keratosis:</strong> A non-cancerous skin growth that may look like warts or moles. <img src="{{ url_for('static', filename='ISIC_0024324.jpg') }}" alt="Example of Pigmented Benign Keratosis"></li>
+                <li><strong>Squamous Cell Carcinoma:</strong> A common type of skin cancer that forms in squamous cells. <img src="{{ url_for('static', filename='ISIC_0024329.jpg') }}" alt="Example of Squamous Cell Carcinoma"></li>
+                <li><strong>Vascular Lesion:</strong> An abnormal collection of blood vessels under the skin. <img src="{{ url_for('static', filename='ISIC_0024370.jpg') }}" alt="Example of Vascular Lesion"></li>
+            </ul>            
+            <p>Please upload a clear and focused image of the skin lesion to receive an AI-driven diagnosis prediction.</p>
+        </div>
+
+        <form id="upload-form" action="/predict" method="post" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*" required>
+            <input type="submit" value="Predict">
+        </form>
+
+
+        <div class="result"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('upload-form');
+        const result = document.querySelector('.result');
+    
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+
+            const formData = new FormData(form);
+    
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+
+                if (data.prediction) {
+                    result.innerHTML = `<strong>Prediction:</strong> ${data.prediction}`;
+                } else {
+                    result.innerHTML = `<strong>Error:</strong> No prediction received.`;
+                }
+            })
+            .catch(error => {
+                result.innerHTML = `<strong>Error:</strong> Failed to fetch prediction. Check your network and try again.`;
+            });
+        });
+    </script>
+    
+    
+</body>
+</html>
