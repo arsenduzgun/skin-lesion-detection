@@ -47,7 +47,7 @@ The model was trained on the HAM10000 dataset. During training, it learned to di
 
 ![Training Accuracy and Loss](./readme-images/train_val.png)
 
-The plot shows that training accuracy steadily improved, surpassing 60%, while validation accuracy fluctuated but followed an upward trend. Both training loss and validation loss decreased over time, indicating effective convergence, although validation loss was more variable.
+The plot shows that training accuracy steadily improved, while validation accuracy fluctuated but followed an upward trend. Both training loss and validation loss decreased over time, indicating effective convergence, although validation loss was more variable.
 
 ### Model Confusion Matrix
 
