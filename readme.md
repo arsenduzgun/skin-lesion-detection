@@ -74,10 +74,11 @@ The web interface was built using HTML and CSS, providing a clean and intuitive 
 
 ### Challenges
 
-- **Class Imbalance**: The HAM10000 dataset contains a disproportionate number of samples for different lesion classes. For instance, classes like Melanoma (MEL) and Nevus (NV) are well-represented, while others like Vascular Lesion (VASC) have fewer samples.
+- **Class Imbalance**: The HAM10000 dataset contains a disproportionate number of samples across different lesion classes. For instance, classes like Melanoma (MEL) and Nevus (NV) are well-represented, while others, such as Vascular Lesion (VASC), have significantly fewer samples. The lack of instances in minority classes makes it challenging for the model to learn the distinct patterns in these underrepresented categories.
 
 ### Future Work
 
+- **Data Augmentation and Collection**: More samples from minority classes should be collected to address class imbalance and improve the model's ability to learn patterns in underrepresented lesion types.
 - **Transfer Learning**: Using pre-trained models such as ResNet or EfficientNet could improve performance by leveraging learned feature representations from larger image datasets.
 - **Mobile and Cloud Integration**: The model could be extended to mobile applications or cloud services, enabling wider access to the skin lesion prediction tool for clinicians and patients.
 
