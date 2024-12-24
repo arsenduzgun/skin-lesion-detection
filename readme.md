@@ -74,7 +74,7 @@ The web interface was built using HTML and CSS, providing a clean and intuitive 
 
 ### Challenges
 
-- **Class Imbalance**: The HAM10000 dataset contains a disproportionate number of samples across different lesion classes. For instance, classes like Melanoma (MEL) and Nevus (NV) are well-represented, while others, such as Vascular Lesion (VASC), have significantly fewer samples. The lack of instances in minority classes makes it challenging for the model to learn the distinct patterns in these underrepresented categories.
+- **Class Imbalance and Minority Class Scarcity:**: The HAM10000 dataset contains a disproportionate number of samples across different lesion classes. For instance, classes like Melanoma (MEL) and Nevus (NV) are well-represented, while others, such as Vascular Lesion (VASC), have significantly fewer samples. The lack of instances in minority classes makes it challenging for the model to learn the distinct patterns in these underrepresented categories.
 
 ### Future Work
 
