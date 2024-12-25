@@ -14,24 +14,24 @@
             height: 100%;
         }
         body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f4f4f4;
-    height: 100vh;
-    width: 100vw;
-}
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+            height: 100vh;
+            width: 100vw;
+        }
 
-.container {
-    background-color: white;
-    padding: 20px 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 60vw; /* Reduce the width of the container */
-    max-width: 900px; /* Ensure it doesn't grow too large */
-    box-sizing: border-box;
-    overflow: auto;
-}
+        .container {
+            background-color: white;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 60vw; /* Reduce the width of the container */
+            max-width: 900px; /* Ensure it doesn't grow too large */
+            box-sizing: border-box;
+            overflow: auto;
+        }
         h1 {
             color: #333;
             font-size: 24px;
@@ -72,32 +72,48 @@
             text-align: left;
         }
         .intro ul {
-    margin: 30px 0;
-    list-style-type: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Fix to 4 columns */
-    gap: 20px; /* Adjust gap for better spacing */
-    justify-content: center; /* Center-align the grid */
-}
+            margin: 30px 0;
+            list-style-type: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Fix to 4 columns */
+            gap: 12px; /* Adjust gap for better spacing */
+            justify-content: center; /* Center-align the grid */
+        }
 
-.intro li {
-    background: #f9f9f9;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 14px;
-    box-sizing: border-box;
-}
+        .intro li {
+            background: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            text-align: left;
+        }
 
-.intro img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin-top: 8px;
-    border-radius: 4px;
-}
+        .intro li p {
+            margin: 0; /* Remove default margin from paragraph */
+            color: #000000;
+            font-size: 14px;
+        }
 
+        .intro li strong {
+            font-weight: bold; /* Keep bold styling */
+            display: inline; /* Ensure the strong element stays inline */
+            white-space: nowrap; /* Prevent breaking after strong element */
+        }
+
+        .intro img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+            margin-top: auto;
+        }
 
     </style>    
 </head>
@@ -107,15 +123,39 @@
         <div class="intro">
             <p>This model is designed to assist in the detection of common skin lesions. It can identify the following skin conditions:</p>
             <ul>
-                <li><strong>Actinic Keratosis:</strong> A rough, scaly patch on the skin caused by years of sun exposure. <img src="{{ url_for('static', filename='ISIC_0024468.jpg') }}" alt="Example of Actinic Keratosis"></li>
-                <li><strong>Basal Cell Carcinoma:</strong> A type of skin cancer that begins in the basal cells. <img src="{{ url_for('static', filename='ISIC_0024331.jpg') }}" alt="Example of Basal Cell Carcinoma"></li>
-                <li><strong>Dermatofibroma:</strong> A benign skin growth that feels like a hard lump. <img src="{{ url_for('static', filename='ISIC_0024318.jpg') }}" alt="Example of Dermatofibroma"></li>
-                <li><strong>Melanoma:</strong> The most serious type of skin cancer that develops in the cells that produce melanin. <img src="{{ url_for('static', filename='ISIC_0024310.jpg') }}" alt="Example of Melanoma"></li>
-                <li><strong>Nevus:</strong> Commonly known as a mole, it's a benign growth of melanocytes. <img src="{{ url_for('static', filename='ISIC_0024306.jpg') }}" alt="Example of Nevus"></li>
-                <li><strong>Pigmented Benign Keratosis:</strong> A non-cancerous skin growth that may look like warts or moles. <img src="{{ url_for('static', filename='ISIC_0024324.jpg') }}" alt="Example of Pigmented Benign Keratosis"></li>
-                <li><strong>Squamous Cell Carcinoma:</strong> A common type of skin cancer that forms in squamous cells. <img src="{{ url_for('static', filename='ISIC_0024329.jpg') }}" alt="Example of Squamous Cell Carcinoma"></li>
-                <li><strong>Vascular Lesion:</strong> An abnormal collection of blood vessels under the skin. <img src="{{ url_for('static', filename='ISIC_0024370.jpg') }}" alt="Example of Vascular Lesion"></li>
-            </ul>            
+                <li>
+                    <p><strong>Actinic Keratosis:</strong> <span>A rough, scaly patch on the skin caused by years of sun exposure.</span></p>
+                    <img src="{{ url_for('static', filename='ISIC_0024468.jpg') }}" alt="Example of Actinic Keratosis">
+                </li>
+                <li>
+                    <p><strong>Basal Cell Carcinoma:</strong> <span>A type of skin cancer that begins in the basal cells.</span></p>
+                    <img src="{{ url_for('static', filename='ISIC_0024331.jpg') }}" alt="Example of Basal Cell Carcinoma">
+                </li>
+                <li>
+                    <p><strong>Dermatofibroma:</strong> <span>A benign skin growth that feels like a hard lump.</span></p>
+                    <img src="{{ url_for('static', filename='ISIC_0024318.jpg') }}" alt="Example of Dermatofibroma">
+                </li>
+                <li>
+                    <p><strong>Melanoma:</strong> <span>The most serious type of skin cancer that develops in the cells that produce melanin.</span></p>
+                    <img src="{{ url_for('static', filename='ISIC_0024310.jpg') }}" alt="Example of Melanoma">
+                </li>
+                <li>
+                    <p><strong>Nevus:</strong> <span>Commonly known as a mole, it's a benign growth of melanocytes.</span></p>
+                    <img src="{{ url_for('static', filename='ISIC_0024306.jpg') }}" alt="Example of Nevus">
+                </li>
+                <li>
+                    <p><strong>Pigmented Benign Keratosis:</strong> <span>A non-cancerous skin growth that may look like warts or moles.</span></p>
+                    <img src="{{ url_for('static', filename='ISIC_0024324.jpg') }}" alt="Example of Pigmented Benign Keratosis">
+                </li>
+                <li>
+                    <p><strong>Squamous Cell Carcinoma:</strong> <span>A common type of skin cancer that forms in squamous cells.</span></p>
+                    <img src="{{ url_for('static', filename='ISIC_0024329.jpg') }}" alt="Example of Squamous Cell Carcinoma">
+                </li>
+                <li>
+                    <p><strong>Vascular Lesion:</strong> <span>An abnormal collection of blood vessels under the skin.</span></p>
+                    <img src="{{ url_for('static', filename='ISIC_0024370.jpg') }}" alt="Example of Vascular Lesion">
+                </li>
+            </ul>         
             <p>Please upload a clear and focused image of the skin lesion to receive an AI-generated diagnosis prediction.</p>
         </div>
 
