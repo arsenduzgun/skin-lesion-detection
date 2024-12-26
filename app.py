@@ -6,29 +6,10 @@ import pandas as pd
 
 app = Flask(__name__)
 
-
 model = joblib.load('model.pkl')
 
-
-@app.route('/')
-def home():
-    return render_template('index.html')
-
-@app.route('/predict', methods=['POST'])
-def predict():
-
-    if 'image' not in request.files:
-        return jsonify({'error': 'No file provided'})
-
-    file = request.files['image']
-
-    if file.filename == '':
-        return jsonify({'error': 'No selected file'})
+def imageArray(image):
     
-
-    image = Image.open(file)
-    
-
     width, height = image.size
     
     if width > height:
@@ -48,6 +29,21 @@ def predict():
     image_array = np.array(image)
     image_array = image_array / 255.0
     image_array = np.expand_dims(image_array, axis=0)
+    return image_array
+
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/predict', methods=['POST'])
+def predict():
+
+    file = request.files['image']
+
+    image = Image.open(file)
+
+    image_array = imageArray(image)
 
     prediction = model.predict(image_array)
     prediction = np.argmax(prediction, axis=1)[0]

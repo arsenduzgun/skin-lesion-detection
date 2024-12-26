@@ -170,7 +170,6 @@
             <input type="submit" value="Predict">
         </form>
 
-
         <div class="result"></div>
     </div>
 
@@ -179,8 +178,8 @@
         const result = document.querySelector('.result');
     
         form.addEventListener('submit', function(event) {
+
             event.preventDefault();
-    
 
             const formData = new FormData(form);
     
@@ -192,13 +191,13 @@
             .then(data => {
 
                 if (data.prediction) {
-                    result.innerHTML = `<strong>Prediction:</strong> ${data.prediction}`;
+                    result.innerHTML = `<strong>Prediction:&nbsp</strong> ${data.prediction}`;
                 } else {
-                    result.innerHTML = `<strong>Error:</strong> No prediction received.`;
+                    result.innerHTML = `<strong>Error:&nbsp</strong> No prediction received.`;
                 }
             })
             .catch(error => {
-                result.innerHTML = `<strong>Error:</strong> Failed to fetch prediction.`;
+                result.innerHTML = `<strong>Error:&nbsp</strong> Failed to fetch prediction.`;
             });
         });
     </script>
