@@ -3,15 +3,18 @@ from PIL import Image
 import joblib
 import numpy as np
 import pandas as pd
+import os
 
 app = Flask(__name__)
 
-model = joblib.load('model.pkl')
+MODEL_PATH = os.getenv('MODEL_PATH', 'model.pkl')
+CLASSES_PATH = os.getenv('CLASSES_PATH', 'classes.csv')
 
-def imageArray(image):
-    
+model = joblib.load(MODEL_PATH)
+classes = pd.read_csv(CLASSES_PATH)
+
+def preprocess_image(image: Image.Image) -> np.ndarray:
     width, height = image.size
-    
     if width > height:
         new_width = height
         left = (width - new_width) // 2
@@ -22,15 +25,10 @@ def imageArray(image):
         top = (height - new_height) // 2
         bottom = top + new_height
         image = image.crop((0, top, width, bottom))
-
-
     image = image.resize((128, 128))
-    
-    image_array = np.array(image)
-    image_array = image_array / 255.0
+    image_array = np.array(image) / 255.0
     image_array = np.expand_dims(image_array, axis=0)
     return image_array
-
 
 @app.route('/')
 def home():
@@ -38,19 +36,13 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-
     file = request.files['image']
-
-    image = Image.open(file)
-
-    image_array = imageArray(image)
-
+    image = Image.open(file).convert('RGB')
+    image_array = preprocess_image(image)
     prediction = model.predict(image_array)
-    prediction = np.argmax(prediction, axis=1)[0]
-    classes = pd.read_csv('classes.csv')
-    prediction = classes['class'][prediction]
-    
-    return jsonify({'prediction': str(prediction)})
+    predicted_class = np.argmax(prediction, axis=1)[0]
+    predicted_label = classes['class'][predicted_class]
+    return jsonify({'prediction': predicted_label})
 
 if __name__ == '__main__':
     app.run(debug=True)
