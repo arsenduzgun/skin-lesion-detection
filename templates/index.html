@@ -1,207 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skin Lesion Detection</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skin Lesion Detection</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-        }
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f4f4f4;
-            height: 100vh;
-            width: 100vw;
-        }
-
-        .container {
-            background-color: white;
-            padding: 20px 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 60vw; /* Reduce the width of the container */
-            max-width: 900px; /* Ensure it doesn't grow too large */
-            box-sizing: border-box;
-            overflow: auto;
-            min-height: 600px; /* Ensure constant height */
-        }
-        h1 {
-            color: #333;
-            font-size: 24px;
-            margin: 20px 0;
-            text-align: center;
-        }
-        p {
-            color: #555;
-            font-size: 16px;
-        }
-        input[type="file"] {
-            display: block;
-            width: 208px;
-            font-size: 16px;
-        }
-        input[type="submit"] {
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 16px;
-            display: block;
-            margin: 30px auto;
-            width: 10%;
-            background-color: #939393;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        input[type="submit"]:hover {
-            background-color: #a9a9a9;
-        }
-        .result {
-            height: 20px; /* Reserve height for result content */
-            text-align: center;
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center; /* Center the text if present */
-        }
-        .intro {
-            margin-bottom: 30px;
-            text-align: left;
-        }
-        .intro ul {
-            margin: 30px 0;
-            list-style-type: none;
-            padding: 0;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* Fix to 4 columns */
-            gap: 12px; /* Adjust gap for better spacing */
-            justify-content: center; /* Center-align the grid */
-        }
-
-        .intro li {
-            background: #f9f9f9;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
-            text-align: left;
-        }
-
-        .intro li p {
-            margin: 0 0 10px 0; /* Remove default margin from paragraph */
-            color: #000000;
-            font-size: 14px;
-            
-        }
-
-        .intro li strong {
-            font-weight: bold; /* Keep bold styling */
-            display: inline; /* Ensure the strong element stays inline */
-            white-space: nowrap; /* Prevent breaking after strong element */
-        }
-
-        .intro img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 4px;
-            margin-top: auto;
-        }
-
-    </style>    
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/skin_lesion.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Skin Lesion Detection Model</h1>
-        <div class="intro">
-            <p>This model is designed to assist in the detection of common skin lesions. It can identify the following skin conditions:</p>
-            <ul>
-                <li>
-                    <p><strong>Actinic Keratosis:</strong> <span>A rough, scaly patch on the skin caused by years of sun exposure.</span></p>
-                    <img src="{{ url_for('static', filename='actinic_keratosis_example.jpg') }}" alt="Example of Actinic Keratosis">
-                </li>
-                <li>
-                    <p><strong>Basal Cell Carcinoma:</strong> <span>A type of skin cancer that begins in the basal cells.</span></p>
-                    <img src="{{ url_for('static', filename='basal_cell_carcinoma_example.jpg') }}" alt="Example of Basal Cell Carcinoma">
-                </li>
-                <li>
-                    <p><strong>Dermatofibroma:</strong> <span>A benign skin growth that feels like a hard lump.</span></p>
-                    <img src="{{ url_for('static', filename='dermatofibroma_example.jpg') }}" alt="Example of Dermatofibroma">
-                </li>
-                <li>
-                    <p><strong>Melanoma:</strong> <span>The most serious type of skin cancer that develops in the cells that produce melanin.</span></p>
-                    <img src="{{ url_for('static', filename='melanoma_example.jpg') }}" alt="Example of Melanoma">
-                </li>
-                <li>
-                    <p><strong>Nevus:</strong> <span>Commonly known as a mole, it's a benign growth of melanocytes.</span></p>
-                    <img src="{{ url_for('static', filename='nevus_example.jpg') }}" alt="Example of Nevus">
-                </li>
-                <li>
-                    <p><strong>Pigmented Benign Keratosis:</strong> <span>A non-cancerous skin growth that may look like warts or moles.</span></p>
-                    <img src="{{ url_for('static', filename='pigmented_benign_keratosis_example.jpg') }}" alt="Example of Pigmented Benign Keratosis">
-                </li>
-                <li>
-                    <p><strong>Squamous Cell Carcinoma:</strong> <span>A common type of skin cancer that forms in squamous cells.</span></p>
-                    <img src="{{ url_for('static', filename='squamous_cell_carcinoma_example.jpg') }}" alt="Example of Squamous Cell Carcinoma">
-                </li>
-                <li>
-                    <p><strong>Vascular Lesion:</strong> <span>An abnormal collection of blood vessels under the skin.</span></p>
-                    <img src="{{ url_for('static', filename='vascular_lesion_example.jpg') }}" alt="Example of Vascular Lesion">
-                </li>
-            </ul>         
-            <p>Please upload a clear and focused image of the skin lesion to receive an AI-generated diagnosis prediction.</p>
-        </div>
+  <div class="container">
+    <h1>Skin Lesion Detection Model</h1>
 
-        <form id="upload-form" action="/predict" method="post" enctype="multipart/form-data">
-            <input type="file" name="image" accept="image/*" required>
-            <input type="submit" value="Predict">
-        </form>
+    <div class="intro">
+      <p>This model is designed to assist in the detection of common skin lesions. It can identify the following skin conditions:</p>
 
-        <div class="result"></div>
+      <ul>
+        <li>
+          <p><strong>Actinic Keratosis:</strong> <span>A rough, scaly patch on the skin caused by years of sun exposure.</span></p>
+          <img src="{{ url_for('static', filename='skin-lesion-examples/actinic_keratosis_example.jpg') }}" alt="Example of Actinic Keratosis">
+        </li>
+        <li>
+          <p><strong>Basal Cell Carcinoma:</strong> <span>A type of skin cancer that begins in the basal cells.</span></p>
+          <img src="{{ url_for('static', filename='skin-lesion-examples/basal_cell_carcinoma_example.jpg') }}" alt="Example of Basal Cell Carcinoma">
+        </li>
+        <li>
+          <p><strong>Dermatofibroma:</strong> <span>A benign skin growth that feels like a hard lump.</span></p>
+          <img src="{{ url_for('static', filename='skin-lesion-examples/dermatofibroma_example.jpg') }}" alt="Example of Dermatofibroma">
+        </li>
+        <li>
+          <p><strong>Melanoma:</strong> <span>The most serious type of skin cancer that develops in the cells that produce melanin.</span></p>
+          <img src="{{ url_for('static', filename='skin-lesion-examples/melanoma_example.jpg') }}" alt="Example of Melanoma">
+        </li>
+        <li>
+          <p><strong>Nevus:</strong> <span>Commonly known as a mole, it's a benign growth of melanocytes.</span></p>
+          <img src="{{ url_for('static', filename='skin-lesion-examples/nevus_example.jpg') }}" alt="Example of Nevus">
+        </li>
+        <li>
+          <p><strong>Pigmented Benign Keratosis:</strong> <span>A non-cancerous skin growth that may look like warts or moles.</span></p>
+          <img src="{{ url_for('static', filename='skin-lesion-examples/pigmented_benign_keratosis_example.jpg') }}" alt="Example of Pigmented Benign Keratosis">
+        </li>
+        <li>
+          <p><strong>Squamous Cell Carcinoma:</strong> <span>A common type of skin cancer that forms in squamous cells.</span></p>
+          <img src="{{ url_for('static', filename='skin-lesion-examples/squamous_cell_carcinoma_example.jpg') }}" alt="Example of Squamous Cell Carcinoma">
+        </li>
+        <li>
+          <p><strong>Vascular Lesion:</strong> <span>An abnormal collection of blood vessels under the skin.</span></p>
+          <img src="{{ url_for('static', filename='skin-lesion-examples/vascular_lesion_example.jpg') }}" alt="Example of Vascular Lesion">
+        </li>
+      </ul>
+
+      <p>Please upload a clear and focused image of the skin lesion to receive an AI-generated diagnosis prediction.</p>
     </div>
 
-    <script>
-        const form = document.getElementById('upload-form');
-        const result = document.querySelector('.result');
-    
-        form.addEventListener('submit', function(event) {
+    <form id="upload-form" action="/predict" method="post" enctype="multipart/form-data">
+      <input type="file" name="image" accept="image/*" required>
+      <input type="submit" value="Predict">
+    </form>
 
-            event.preventDefault();
+    <div class="result"></div>
+  </div>
 
-            const formData = new FormData(form);
-    
-            fetch('/predict', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-
-                if (data.prediction) {
-                    result.innerHTML = `<strong>Prediction:&nbsp</strong> ${data.prediction}`;
-                } else {
-                    result.innerHTML = `<strong>Error:&nbsp</strong> No prediction received.`;
-                }
-            })
-            .catch(error => {
-                result.innerHTML = `<strong>Error:&nbsp</strong> Failed to fetch prediction.`;
-            });
-        });
-    </script>
-    
-    
+  <script src="{{ url_for('static', filename='js/skin_lesion.js') }}" defer></script>
 </body>
 </html>
