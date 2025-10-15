@@ -7,8 +7,8 @@ import os
 
 app = Flask(__name__)
 
-MODEL_PATH = os.getenv('MODEL_PATH', 'model.pkl')
-CLASSES_PATH = os.getenv('CLASSES_PATH', 'classes.csv')
+MODEL_PATH = os.getenv('MODEL_PATH', 'model/model.pkl')
+CLASSES_PATH = os.getenv('CLASSES_PATH', 'model/classes.csv')
 
 model = joblib.load(MODEL_PATH)
 classes = pd.read_csv(CLASSES_PATH)
