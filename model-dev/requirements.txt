@@ -1,0 +1,10 @@
+jupyterlab
+ipykernel
+numpy
+pandas
+matplotlib
+scipy
+scikit-learn
+imbalanced-learn
+pillow
+tensorflow

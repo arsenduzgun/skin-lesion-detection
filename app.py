@@ -2,16 +2,19 @@ from flask import Flask, request, jsonify, render_template
 from PIL import Image
 import joblib
 import numpy as np
-import pandas as pd
+import json
 import os
+import tensorflow as tf
 
 app = Flask(__name__)
 
-MODEL_PATH = os.getenv('MODEL_PATH', 'model/model.pkl')
-CLASSES_PATH = os.getenv('CLASSES_PATH', 'model/classes.csv')
+MODEL_PATH = os.getenv('MODEL_PATH', 'model-dev/models/model.keras')
+CLASSES_PATH = os.getenv('CLASSES_PATH', 'model-dev/dataset/classes.json')
 
+model = tf.keras.models.load_model(MODEL_PATH)
 model = joblib.load(MODEL_PATH)
-classes = pd.read_csv(CLASSES_PATH)
+with open(CLASSES_PATH, "r") as f:
+    classes = json.load(f)
 
 def preprocess_image(image: Image.Image) -> np.ndarray:
     width, height = image.size
@@ -40,8 +43,8 @@ def predict():
     image = Image.open(file).convert('RGB')
     image_array = preprocess_image(image)
     prediction = model.predict(image_array)
-    predicted_class = np.argmax(prediction, axis=1)[0]
-    predicted_label = classes['class'][predicted_class]
+    predicted_idx = int(np.argmax(prediction, axis=1)[0])
+    predicted_label = classes[predicted_idx]
     return jsonify({'prediction': predicted_label})
 
 if __name__ == '__main__':
