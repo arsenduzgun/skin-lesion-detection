@@ -12,17 +12,16 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy app code and assets
+# --- Bake everything into the image (fallback if no mounts are provided) ---
 COPY app.py /app/app.py
 COPY templates/ /app/templates/
 COPY static/ /app/static/
+COPY model-dev/models/ /app/model-dev/models/
+COPY model-dev/dataset/classes.json /app/model-dev/dataset/classes.json
 
-# Copy the entire model folder into the image (keeps structure tidy)
-COPY model/ /app/model/
-
-# Defaults (compose can override); matches repo layout (model/model.pkl etc.)
-ENV MODEL_PATH=/app/model/model.pkl \
-    CLASSES_PATH=/app/model/classes.csv \
+# Defaults (compose can override); matches repo layout
+ENV MODEL_PATH=/app/model-dev/models/model.keras \
+    CLASSES_PATH=/app/model-dev/dataset/classes.json \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 

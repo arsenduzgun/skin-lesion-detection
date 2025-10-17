@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify, render_template
 from PIL import Image
-import joblib
 import numpy as np
 import json
 import os
@@ -12,7 +11,6 @@ MODEL_PATH = os.getenv('MODEL_PATH', 'model-dev/models/model.keras')
 CLASSES_PATH = os.getenv('CLASSES_PATH', 'model-dev/dataset/classes.json')
 
 model = tf.keras.models.load_model(MODEL_PATH)
-model = joblib.load(MODEL_PATH)
 with open(CLASSES_PATH, "r") as f:
     classes = json.load(f)
 

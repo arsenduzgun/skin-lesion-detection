@@ -9,12 +9,13 @@ services:
       - ./app.py:/app/app.py
       - ./templates:/app/templates
       - ./static:/app/static
-      - ./model:/app/model:ro   # read-only to the container for safety
+      - ./model-dev/models:/app/model-dev/models:ro
+      - ./model-dev/dataset/classes.json:/app/model-dev/dataset/classes.json:ro
 
     # Point app to the mounted model (same path as baked, so no env override needed)
     environment:
-      MODEL_PATH: /app/model/model.pkl
-      CLASSES_PATH: /app/model/classes.csv
+      MODEL_PATH: /app/model-dev/models/model.keras
+      CLASSES_PATH: /app/model-dev/dataset/classes.json
 
     # Auto-reload Python code on change (templates/CSS update on refresh)
     command: >
