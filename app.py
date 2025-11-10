@@ -7,6 +7,10 @@ import tensorflow as tf
 
 app = Flask(__name__)
 
+app.config["TEMPLATES_AUTO_RELOAD"] = True
+app.jinja_env.auto_reload = True
+
+
 # --- Paths (env-overridable) ---
 MODEL_PATH = os.getenv("MODEL_PATH", "models/HAM10000_efficientnetB0.keras")
 META_PATH  = os.getenv("META_PATH",  "models/HAM10000_meta.json")

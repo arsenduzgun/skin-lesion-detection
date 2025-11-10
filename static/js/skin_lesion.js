@@ -5,6 +5,7 @@ form.addEventListener('submit', function (event) {
   event.preventDefault();
 
   const formData = new FormData(form);
+  result.textContent = 'Predicting…';
 
   fetch('/predict', {
     method: 'POST',
@@ -13,12 +14,14 @@ form.addEventListener('submit', function (event) {
     .then((response) => response.json())
     .then((data) => {
       if (data.prediction) {
-        result.innerHTML = `<strong>Prediction:&nbsp;</strong> ${data.prediction}`;
+        result.innerHTML = `<strong>Prediction:&nbsp;</strong>${data.prediction}`;
+      } else if (data.error) {
+        result.innerHTML = `<strong>Error:&nbsp;</strong>${data.error}`;
       } else {
-        result.innerHTML = `<strong>Error:&nbsp;</strong> No prediction received.`;
+        result.innerHTML = `<strong>Error:&nbsp;</strong>No prediction received.`;
       }
     })
     .catch(() => {
-      result.innerHTML = `<strong>Error:&nbsp;</strong> Failed to fetch prediction.`;
+      result.innerHTML = `<strong>Error:&nbsp;</strong>Failed to fetch prediction.`;
     });
 });
