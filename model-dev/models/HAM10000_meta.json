@@ -1,0 +1,22 @@
+{
+  "img_size": 256,
+  "class_names": [
+    "akiec",
+    "bcc",
+    "bkl",
+    "df",
+    "mel",
+    "nv",
+    "vasc"
+  ],
+  "thresholds": [
+    0.5788781046867371,
+    0.46464526653289795,
+    0.335191011428833,
+    0.8416936993598938,
+    0.5343836545944214,
+    0.11706142127513885,
+    0.9594128727912903
+  ],
+  "preprocess": "inputs * 255.0 -> tf.keras.applications.efficientnet.preprocess_input"
+}

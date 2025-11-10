@@ -17,11 +17,10 @@ COPY app.py /app/app.py
 COPY templates/ /app/templates/
 COPY static/ /app/static/
 COPY model-dev/models/ /app/model-dev/models/
-COPY model-dev/dataset/classes.json /app/model-dev/dataset/classes.json
 
 # Defaults (compose can override); matches repo layout
-ENV MODEL_PATH=/app/model-dev/models/model.keras \
-    CLASSES_PATH=/app/model-dev/dataset/classes.json \
+ENV MODEL_PATH=/app/model-dev/models/HAM10000_efficientnetB0.keras \
+    META_PATH=/app/model-dev/models/HAM10000_meta.json \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
