@@ -48,5 +48,3 @@ docker rmi model-dev-image
 This project uses the publicly available HAM10000 dermoscopic image dataset.
 
 You can access and download it here: https://api.isic-archive.com/collections/212/
-
-This project focuses on developing a deep learning-based system to classify skin lesions using dermatoscopic images from the HAM10000 dataset. The model is designed to predict the type of skin lesion based on image input, offering a potential tool for assisting dermatologists in diagnosing skin conditions, including various types of skin cancer.
