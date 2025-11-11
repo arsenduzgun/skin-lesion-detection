@@ -1,20 +1,21 @@
 services:
-  web:
-    build: .
+  backend:
+    build:
+      context: ./backend
     ports:
       - "5000:5000"
 
     # Bind mounts override baked files so you can edit without rebuilds
     volumes:
-      - ./app.py:/app/app.py
-      - ./templates:/app/templates
-      - ./static:/app/static
-      - ./model-dev/models:/app/model-dev/models:ro
+      - ./backend/app.py:/backend/app.py
+      - ./backend/templates:/backend/templates
+      - ./backend/static:/backend/static
+      - ./backend/models:/backend/models:ro
 
     # Point app to the mounted model (same path as baked, so no env override needed)
     environment:
-      MODEL_PATH: /app/model-dev/models/HAM10000_efficientnetB0.keras
-      META_PATH: /app/model-dev/models/HAM10000_meta.json
+      MODEL_PATH: /backend/models/HAM10000_efficientnetB0.keras
+      META_PATH: /backend/models/HAM10000_meta.json
 
     # Auto-reload Python code on change (templates/CSS update on refresh)
 
@@ -32,5 +33,7 @@ services:
 
 
 # build and run: docker compose up --build -d
+
+# server: localhost:5000
 
 # kill: docker compose down

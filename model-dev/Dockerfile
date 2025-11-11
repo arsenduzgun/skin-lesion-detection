@@ -22,9 +22,9 @@ WORKDIR /model-dev
 
 # ---- Python deps ----
 # IMPORTANT: do NOT include 'tensorflow' in requirements.txt
-COPY requirements.txt /tmp/requirements.txt
+COPY requirements.txt .
 RUN python -m pip install --upgrade pip && \
-    pip install --no-cache-dir -r /tmp/requirements.txt
+    pip install --no-cache-dir -r requirements.txt
 
 # Optional: a named kernel in Jupyter
 RUN python -m ipykernel install --name docker-jupyter --display-name "Python (docker)"
@@ -41,9 +41,10 @@ CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--ServerA
 
 
 
-# build the image: docker build -t model-dev-image .
 
-# run the container: docker run -d --rm --name model-dev-container --gpus all --shm-size=8g -p 8888:8888 -v "${PWD}:/model-dev" model-dev-image
+# build the image: docker build -t model-dev-image -f model-dev/Dockerfile model-dev
+
+# run the container: docker run -d --rm --name model-dev-container --gpus all --shm-size=8g -p 8888:8888 -v "${PWD}:/workspace" -w /workspace/model-dev model-dev-image
 
 # server: http://127.0.0.1:8888/?token=devtoken
 
