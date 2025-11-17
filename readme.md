@@ -7,6 +7,10 @@ This project provides a web-based interface and development environment for clas
 - **Docker**
 - **Git LFS**
 
+## Clone the Project
+
+git clone https://github.com/arsenduzgun/skin-lesion-detection.git
+
 ## Run the Application
 
 ### Build & Start
