@@ -1,5 +1,36 @@
-# Jupyter Notebook checkpoints
+# --- Python cache files ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Virtual environments ---
+venv/
+.env/
+.env*/
+*.env
+
+# --- Jupyter ---
 .ipynb_checkpoints/
 
-ss
-Report.docx
+# --- TensorFlow cache / temp files ---
+saved_model/
+checkpoints/
+*.tfrecord
+*.tensorboard
+
+# --- Logs ---
+*.log
+
+# --- VS Code ---
+.vscode/
+*.code-workspace
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+
+# --- Build & packaging ---
+dist/
+build/
+cache/
