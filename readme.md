@@ -7,7 +7,7 @@ This project provides a web-based interface and development environment for clas
 - **Docker**
 - **Git LFS**
 
-## Run the Web Application
+## Run the Application
 
 ### Build & Start
 
