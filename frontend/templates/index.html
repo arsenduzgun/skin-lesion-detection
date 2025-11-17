@@ -6,7 +6,7 @@
   <title>Skin Lesion Detection</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/skin_lesion.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <div class="container">
@@ -38,9 +38,18 @@
       <input type="submit" value="Predict">
     </form>
 
-    <div class="result" aria-live="polite"></div>
+    <div class="result" aria-live="polite">
+      <!-- 3-dot processing loader -->
+      <div class="processing-loader" id="processing-loader">
+        <span></span><span></span><span></span>
+      </div>
+
+      <!-- Where we print the prediction / errors -->
+      <div class="result-text" id="result-text"></div>
+    </div>
+
   </div>
 
-  <script src="{{ url_for('static', filename='js/skin_lesion.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </body>
 </html>

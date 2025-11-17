@@ -19,7 +19,7 @@ http://localhost:5000
 
 ### Stop
 
-docker compose down
+docker compose down -rmi all
 
 ## Run the Jupyter Notebook (Model Development)
 

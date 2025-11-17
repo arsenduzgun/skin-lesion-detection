@@ -5,7 +5,11 @@ import json
 import os
 import tensorflow as tf
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_folder="../frontend/static",
+    template_folder="../frontend/templates",
+)
 
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.jinja_env.auto_reload = True
